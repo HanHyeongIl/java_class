@@ -1,0 +1,292 @@
+🛒 전자상거래 쇼핑몰 클래스 모델링 — 상세 개념 설명
+
+전자상거래 시스템은 크게 사용자, 상품, 장바구니, 주문, 결제, 배송 등으로 나뉩니다.
+각 요소는 서로 관계를 맺고 있으며, 클래스에서 어떤 속성과 메서드를 가져야 하는지가 자연스럽게 정해져요.
+
+1️⃣ User(사용자) 영역
+✔ 주요 클래스
+
+User(부모)
+
+Buyer(구매자)
+
+Seller(판매자)
+
+✔ 속성 예시
+
+id
+
+name
+
+email
+
+password
+
+address
+
+✔ 동작(메서드)
+
+로그인/로그아웃
+
+구매자: 장바구니 관리, 주문 생성
+
+판매자: 상품 등록, 재고 수정
+
+✔ 관계
+
+Buyer → Cart를 하나 가진다
+
+Buyer → 여러 Order를 가진다
+
+Seller → 여러 Product를 등록한다
+
+✔ 포함 개념
+
+상속 (User → Buyer, Seller)
+
+캡슐화(개인정보 접근 제한)
+
+2️⃣ Product(상품) 영역
+✔ 주요 클래스
+
+Product(부모)
+
+CategoryProduct(카테고리 세부화 가능)
+
+Electronics
+
+Clothing
+
+Food …
+
+✔ 속성
+
+id
+
+name
+
+price
+
+description
+
+stock
+
+seller_id
+
+✔ 메서드
+
+update_stock()
+
+change_price()
+
+show_detail()
+
+✔ 관계
+
+Product → Seller가 등록
+
+Product → CartItem/OrderItem에 의해 참조됨
+
+✔ 포함 개념
+
+다형성 (상품 타입별 추가 속성)
+
+캡슐화 (stock 변경 메서드로만 조정)
+
+3️⃣ Cart(장바구니) 영역
+✔ 구성 클래스
+
+Cart
+
+CartItem
+
+✔ 속성
+
+Cart:
+
+items (CartItem 리스트)
+
+CartItem:
+
+product
+
+quantity
+
+✔ 메서드
+
+add_item(product, amount)
+
+remove_item(product)
+
+update_quantity(product, amount)
+
+total_price()
+
+checkout() → Order 생성
+
+✔ 관계
+
+Cart → 여러 CartItem을 가진다
+
+CartItem → 하나의 Product 참조
+
+✔ 포함 개념
+
+집합 관계 (Cart has many CartItems)
+
+계산 로직 (합계 금액 계산)
+
+4️⃣ Order(주문) 영역
+✔ 주요 클래스
+
+Order
+
+OrderItem
+
+ShippingInfo
+
+✔ 속성
+
+Order:
+
+id
+
+buyer
+
+items
+
+status (결제대기, 결제완료, 배송중, 배송완료 등)
+
+payment_method
+
+shipping_info
+
+OrderItem:
+
+product
+
+purchase_price
+
+quantity
+
+ShippingInfo:
+
+address
+
+receiver
+
+phone
+
+tracking_number
+
+✔ 메서드
+
+change_status()
+
+calculate_total()
+
+request_refund()
+
+✔ 관계
+
+Order → Buyer가 생성
+
+Order → 여러 OrderItem 포함
+
+ShippingInfo → Order가 포함
+
+✔ 포함 개념
+
+상태 패턴(State) 가능
+
+주문-상품 관계 모델링
+
+상품 가격 스냅샷(구매 당시 가격 저장)
+
+5️⃣ Payment(결제) 영역
+✔ 주요 클래스
+
+PaymentMethod(추상 클래스)
+
+CreditCard
+
+BankTransfer
+
+PayPal 등
+
+✔ 속성
+
+name
+
+transaction_id
+
+success
+
+✔ 메서드
+
+pay(order) (다형성 적용)
+
+✔ 관계
+
+Order → PaymentMethod 사용
+
+✔ 포함 개념
+
+다형성 (결제 방식에 따라 pay() 구현 다름)
+
+인터페이스/추상 클래스 필요성
+
+6️⃣ Shipment(배송) 영역
+✔ 클래스
+
+DeliveryCompany
+
+ShipmentTracker
+
+✔ 속성
+
+DeliveryCompany:
+
+name
+
+fee_policy
+
+ShipmentTracker:
+
+tracking_number
+
+current_status
+
+history
+
+✔ 메서드
+
+ShipmentTracker:
+
+update_status()
+
+get_current_status()
+
+✔ 관계
+
+ShipmentTracker → Order 혹은 ShippingInfo와 연결
+
+📌 전체 구조 요약 (클래스 간 관계)
+User
+ ├── Buyer —— Cart —— CartItem —— Product
+ └── Seller —— Product
+
+Order —— OrderItem —— Product
+Order —— ShippingInfo
+Order —— PaymentMethod(추상) —— CreditCard/BankTransfer…
+
+Product —— Seller
+
+🎯 이 모델링으로 연습 가능한 OOP 개념
+개념	적용 예시
+상속	User → Buyer/Seller, PaymentMethod → 서브클래스
+다형성	pay() 메서드
+캡슐화	stock, password 보호
+집합/구성 관계	Cart → CartItem, Order → OrderItem
+의존 관계	Order → PaymentMethod
+추상화	PaymentMethod, Product 분류

@@ -1,0 +1,20 @@
+🎮 LEVEL 6 — 실제 프로젝트 스타일 문제
+📌 문제 6. 미니 RPG 캐릭터 시스템 만들기
+
+여러 클래스가 상호작용하는 연습이다.
+
+Character (부모 클래스)
+
+속성: name, hp, attack
+
+Warrior(Character)
+
+특수 공격 power_strike() → 2배 데미지
+
+Monster
+
+속성: name, hp
+
+메서드: take_damage(att) → HP 감소
+
+👉 전사가 몬스터를 공격 → HP 변화 출력

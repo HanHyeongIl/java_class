@@ -1,0 +1,17 @@
+🚌 LEVEL 4 — 상속(Inheritance)
+📌 문제 4. 교통수단 클래스 만들기
+부모 클래스: Vehicle
+
+속성: brand, speed
+
+메서드: move() → “이동 중입니다.”
+
+자식 클래스: Bus, Bicycle
+
+각각 다른 방식으로 move()를 재정의(overriding)
+
+Bus → “버스가 {speed}km로 달립니다.”
+
+Bicycle → “자전거가 천천히 이동합니다.”
+
+👉 Bus와 Bicycle 객체를 만들어 해당 메서드 호출

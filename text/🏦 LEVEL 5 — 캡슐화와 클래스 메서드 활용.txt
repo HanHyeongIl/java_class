@@ -1,0 +1,22 @@
+🏦 LEVEL 5 — 캡슐화와 클래스 메서드 활용
+📌 문제 5. 은행 계좌 시스템 만들기
+BankAccount 클래스
+
+비공개 속성: __balance
+
+속성: owner
+
+메서드:
+
+deposit(amount)
+
+withdraw(amount)
+
+get_balance()
+
+추가 요구:
+
+입금, 출금 시 음수 금액 불가
+잔액보다 큰 금액 출금 불가
+
+👉 계좌 객체 만들고 입출금 시나리오 실행
