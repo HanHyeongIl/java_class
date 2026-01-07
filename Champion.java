@@ -14,6 +14,7 @@ class Champion {      //사용할 변수 생성
     }
 
     int getKill() {
+        System.out.println("Kills!");
         return kills;
     }
 
