@@ -9,6 +9,7 @@ public class Credit2 {
         // char grade = 'F';
         switch (grade) {
             case 'A':
+                System.out.println("case A");
                 System.out.println("4.0");
                 break;
             case 'B':
