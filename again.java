@@ -17,6 +17,8 @@ public class again {
     public static void main(String args[]) {
         System.out.println("Hello java");
         Sample a = new Sample("Hello java");
+        System.out.println("Hello java");
+        
     }
     
 } 
